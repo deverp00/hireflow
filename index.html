@@ -1,106 +1,300 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="CampusDesk ERP — a responsive school management dashboard prototype.">
-  <title>CampusDesk ERP — School Management</title>
-  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/app.css">
-  <script defer src="assets/js/demo-data.js"></script>
-  <script defer src="assets/js/main.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#315c45">
+
+    <title>Careers | HireFlow</title>
+    <meta
+        name="description"
+        content="Explore job opportunities and apply through our careers portal."
+    >
+
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="public.js"></script>
 </head>
+
 <body>
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div class="top-strip" aria-hidden="true"></div>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="#home" aria-label="Careers home">
+                <span class="brand-mark" aria-hidden="true">H</span>
+                <span class="brand-name">HireFlow</span>
+            </a>
 
-  <div class="app-shell" id="app-shell">
-    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
-      <a class="brand" href="#dashboard" data-route="dashboard" aria-label="CampusDesk ERP home">
-        <span class="brand-mark" aria-hidden="true">C</span>
-        <span class="brand-copy">
-          <strong>CampusDesk</strong>
-          <small>School management</small>
-        </span>
-      </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="#openings">Open positions</a>
+                <a href="#about">About</a>
+            </nav>
 
-      <div class="sidebar-school">
-        <span class="school-avatar" aria-hidden="true">MG</span>
-        <span class="sidebar-school-copy">
-          <strong>CampusDesk Demo School</strong>
-          <small>Demo workspace</small>
-        </span>
-        <span class="demo-dot" title="Demo mode" aria-label="Demo mode"></span>
-      </div>
-
-      <nav class="nav-groups" id="navigation" aria-label="ERP modules">
-        <p class="nav-label">WORKSPACE</p>
-        <a class="nav-link is-active" href="#dashboard" data-route="dashboard" aria-current="page">
-          <span class="nav-icon" aria-hidden="true" data-icon="dashboard"></span><span>Dashboard</span>
-        </a>
-
-        <p class="nav-label">ACADEMICS</p>
-        <a class="nav-link" href="#students" data-route="students"><span class="nav-icon" aria-hidden="true" data-icon="students"></span><span>Students</span></a>
-        <a class="nav-link" href="#admissions" data-route="admissions"><span class="nav-icon" aria-hidden="true" data-icon="admissions"></span><span>Admissions</span></a>
-        <a class="nav-link" href="#classes" data-route="classes"><span class="nav-icon" aria-hidden="true" data-icon="classes"></span><span>Classes &amp; sections</span></a>
-        <a class="nav-link" href="#attendance" data-route="attendance"><span class="nav-icon" aria-hidden="true" data-icon="attendance"></span><span>Attendance</span></a>
-        <a class="nav-link" href="#exams-results" data-route="exams-results"><span class="nav-icon" aria-hidden="true" data-icon="exams"></span><span>Exams &amp; results</span></a>
-
-        <p class="nav-label">FINANCE</p>
-        <a class="nav-link" href="#fees" data-route="fees"><span class="nav-icon" aria-hidden="true" data-icon="fees"></span><span>Fee management</span></a>
-        <a class="nav-link" href="#salary" data-route="salary"><span class="nav-icon" aria-hidden="true" data-icon="salary"></span><span>Salary &amp; payroll</span></a>
-
-        <p class="nav-label">PEOPLE &amp; REPORTS</p>
-        <a class="nav-link" href="#teachers" data-route="teachers"><span class="nav-icon" aria-hidden="true" data-icon="teachers"></span><span>Teachers &amp; staff</span></a>
-        <a class="nav-link" href="#reports" data-route="reports"><span class="nav-icon" aria-hidden="true" data-icon="reports"></span><span>Reports</span></a>
-        <a class="nav-link" href="#admit-cards" data-route="admit-cards"><span class="nav-icon" aria-hidden="true" data-icon="cards"></span><span>Admit cards</span></a>
-
-        <p class="nav-label">CONFIGURATION</p>
-        <a class="nav-link" href="#settings" data-route="settings"><span class="nav-icon" aria-hidden="true" data-icon="settings"></span><span>Settings</span></a>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="help-symbol" aria-hidden="true">?</div>
-        <div>
-          <strong>Getting started</strong>
-          <p>This is a demo-only build. No login or live data is connected.</p>
+            <a class="header-action" href="#openings">
+                Explore jobs <span aria-hidden="true">→</span>
+            </a>
         </div>
-      </div>
-    </aside>
+    </header>
 
-    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+    <main id="home">
+        <section class="hero-section">
+            <div class="container hero-content">
+                <p class="eyebrow" data-company-name></p>
 
-    <div class="main-column">
-      <header class="topbar">
-        <div class="topbar-left">
-          <button class="icon-button menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
-            <span class="nav-icon" data-icon="menu" aria-hidden="true"></span>
-          </button>
-          <div class="breadcrumb"><span>CampusDesk</span><span class="breadcrumb-separator">/</span><strong id="breadcrumb-current">Dashboard</strong></div>
+                <h1 data-company-heading>
+                    Find your next opportunity.
+                </h1>
+
+                <p class="hero-description" data-company-description></p>
+
+                <a class="button button-primary" href="#openings">
+                    Browse open positions
+                </a>
+            </div>
+        </section>
+
+        <section class="jobs-section container" id="openings">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">CAREERS</p>
+                    <h2>Open positions</h2>
+                    <p class="section-description">
+                        Explore available opportunities and submit your application.
+                    </p>
+                </div>
+
+                <span class="job-count" id="job-count" aria-live="polite"></span>
+            </div>
+
+            <form class="job-filters" id="job-search-form" role="search">
+                <label class="search-field">
+                    <span class="visually-hidden">Search jobs</span>
+                    <span aria-hidden="true">⌕</span>
+                    <input
+                        type="search"
+                        id="job-search"
+                        name="search"
+                        placeholder="Search job title or keyword"
+                        autocomplete="off"
+                    >
+                </label>
+
+                <label class="filter-field">
+                    <span class="visually-hidden">Filter by department</span>
+                    <select id="department-filter" name="department">
+                        <option value="">All departments</option>
+                    </select>
+                </label>
+
+                <label class="filter-field">
+                    <span class="visually-hidden">Filter by location</span>
+                    <select id="location-filter" name="location">
+                        <option value="">All locations</option>
+                    </select>
+                </label>
+
+                <button class="button button-secondary" type="reset">
+                    Clear filters
+                </button>
+            </form>
+
+            <div
+                class="jobs-list"
+                id="jobs-list"
+                aria-live="polite"
+                aria-busy="true"
+            >
+                <!-- Active job openings will be rendered from Firebase. -->
+                <p class="loading-message" id="jobs-status">
+                    Loading job openings...
+                </p>
+            </div>
+
+            <div class="empty-state" id="jobs-empty" hidden>
+                <h3>No matching positions</h3>
+                <p>There are no available positions matching your search.</p>
+            </div>
+
+            <div class="error-state" id="jobs-error" hidden>
+                <p>Job openings could not be loaded.</p>
+                <button
+                    class="button button-secondary"
+                    id="retry-jobs"
+                    type="button"
+                >
+                    Try again
+                </button>
+            </div>
+        </section>
+
+        <section class="about-section" id="about">
+            <div class="container about-content">
+                <div>
+                    <p class="eyebrow">ABOUT THE COMPANY</p>
+                    <h2 data-about-heading></h2>
+                </div>
+
+                <p data-about-description></p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <a class="brand footer-brand" href="#home">
+                <span class="brand-mark" aria-hidden="true">H</span>
+                <span class="brand-name">HireFlow</span>
+            </a>
+
+            <p>
+                <span data-footer-company></span>
+                <span id="footer-year"></span>
+            </p>
         </div>
-        <div class="topbar-actions">
-          <form class="global-search" id="global-search" role="search">
-            <span class="search-icon" data-icon="search" aria-hidden="true"></span>
-            <input id="global-search-input" type="search" name="q" autocomplete="off" placeholder="Search students…" aria-label="Search students">
-            <kbd>Enter</kbd>
-          </form>
-          <span class="mode-pill"><span class="status-dot" aria-hidden="true"></span> Demo mode</span>
+    </footer>
+
+    <!-- Application dialog -->
+    <dialog class="application-dialog" id="application-dialog">
+        <div class="dialog-header">
+            <div>
+                <p class="eyebrow">CAREERS</p>
+                <h2>Submit your application</h2>
+                <p id="application-job-title"></p>
+            </div>
+
+            <button
+                class="icon-button"
+                type="button"
+                id="close-application"
+                aria-label="Close application form"
+            >
+                ×
+            </button>
         </div>
-      </header>
 
-      <main id="main-content" class="main-content" tabindex="-1">
-        <div id="page-content" aria-live="polite" aria-busy="false"></div>
-      </main>
-      <footer class="app-footer">
-        <span>CampusDesk ERP <span class="footer-separator">·</span> Portfolio prototype</span>
-        <span><span class="footer-status" aria-hidden="true"></span> Demo data only</span>
-      </footer>
-    </div>
-  </div>
+        <form id="application-form">
+            <input type="hidden" id="application-job-id" name="jobId">
 
-  <noscript>
-    <div class="noscript-message">CampusDesk needs JavaScript enabled to render the interactive demo dashboard.</div>
-  </noscript>
+            <div class="form-grid">
+                <label class="form-field">
+                    <span>Full name <span aria-hidden="true">*</span></span>
+                    <input
+                        type="text"
+                        id="applicant-name"
+                        name="name"
+                        autocomplete="name"
+                        maxlength="120"
+                        required
+                    >
+                </label>
+
+                <label class="form-field">
+                    <span>Email address <span aria-hidden="true">*</span></span>
+                    <input
+                        type="email"
+                        id="applicant-email"
+                        name="email"
+                        autocomplete="email"
+                        maxlength="254"
+                        required
+                    >
+                </label>
+
+                <label class="form-field">
+                    <span>Phone number <span aria-hidden="true">*</span></span>
+                    <input
+                        type="tel"
+                        id="applicant-phone"
+                        name="phone"
+                        autocomplete="tel"
+                        maxlength="25"
+                        required
+                    >
+                </label>
+
+                <label class="form-field">
+                    <span>Years of experience</span>
+                    <select id="applicant-experience" name="experience">
+                        <option value="">Select experience</option>
+                        <option value="0">Fresher</option>
+                        <option value="1">Less than 1 year</option>
+                        <option value="1-2">1–2 years</option>
+                        <option value="3-5">3–5 years</option>
+                        <option value="6+">6+ years</option>
+                    </select>
+                </label>
+
+                <label class="form-field form-field-full">
+                    <span>Resume <span aria-hidden="true">*</span></span>
+                    <input
+                        type="file"
+                        id="applicant-resume"
+                        name="resume"
+                        accept=".pdf,.doc,.docx"
+                        required
+                    >
+                    <small>Accepted formats: PDF, DOC and DOCX.</small>
+                </label>
+
+                <label class="form-field form-field-full">
+                    <span>Cover letter</span>
+                    <textarea
+                        id="applicant-cover-letter"
+                        name="coverLetter"
+                        rows="4"
+                        maxlength="5000"
+                        placeholder="Introduce yourself and explain your interest in this role."
+                    ></textarea>
+                </label>
+
+                <label class="consent-field form-field-full">
+                    <input
+                        type="checkbox"
+                        id="applicant-consent"
+                        name="consent"
+                        required
+                    >
+                    <span>
+                        I consent to the processing of my information for this
+                        job application.
+                    </span>
+                </label>
+            </div>
+
+            <div
+                class="form-message"
+                id="application-message"
+                aria-live="polite"
+            ></div>
+
+            <div class="dialog-actions">
+                <button
+                    class="button button-secondary"
+                    id="cancel-application"
+                    type="button"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    class="button button-primary"
+                    id="submit-application"
+                    type="submit"
+                >
+                    Submit application
+                </button>
+            </div>
+        </form>
+    </dialog>
+
+    <div
+        class="toast"
+        id="toast"
+        role="status"
+        aria-live="polite"
+        hidden
+    ></div>
+
+    <noscript>
+        <p>This careers portal requires JavaScript to load job openings.</p>
+    </noscript>
 </body>
 </html>
