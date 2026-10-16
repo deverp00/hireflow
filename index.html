@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="CampusDesk ERP — a responsive school management dashboard prototype.">
+  <title>CampusDesk ERP — School Management</title>
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <script defer src="assets/js/demo-data.js"></script>
+  <script defer src="assets/js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="top-strip" aria-hidden="true"></div>
+
+  <div class="app-shell" id="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#dashboard" data-route="dashboard" aria-label="CampusDesk ERP home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span class="brand-copy">
+          <strong>CampusDesk</strong>
+          <small>School management</small>
+        </span>
+      </a>
+
+      <div class="sidebar-school">
+        <span class="school-avatar" aria-hidden="true">MG</span>
+        <span class="sidebar-school-copy">
+          <strong>CampusDesk Demo School</strong>
+          <small>Demo workspace</small>
+        </span>
+        <span class="demo-dot" title="Demo mode" aria-label="Demo mode"></span>
+      </div>
+
+      <nav class="nav-groups" id="navigation" aria-label="ERP modules">
+        <p class="nav-label">WORKSPACE</p>
+        <a class="nav-link is-active" href="#dashboard" data-route="dashboard" aria-current="page">
+          <span class="nav-icon" aria-hidden="true" data-icon="dashboard"></span><span>Dashboard</span>
+        </a>
+
+        <p class="nav-label">ACADEMICS</p>
+        <a class="nav-link" href="#students" data-route="students"><span class="nav-icon" aria-hidden="true" data-icon="students"></span><span>Students</span></a>
+        <a class="nav-link" href="#admissions" data-route="admissions"><span class="nav-icon" aria-hidden="true" data-icon="admissions"></span><span>Admissions</span></a>
+        <a class="nav-link" href="#classes" data-route="classes"><span class="nav-icon" aria-hidden="true" data-icon="classes"></span><span>Classes &amp; sections</span></a>
+        <a class="nav-link" href="#attendance" data-route="attendance"><span class="nav-icon" aria-hidden="true" data-icon="attendance"></span><span>Attendance</span></a>
+        <a class="nav-link" href="#exams-results" data-route="exams-results"><span class="nav-icon" aria-hidden="true" data-icon="exams"></span><span>Exams &amp; results</span></a>
+
+        <p class="nav-label">FINANCE</p>
+        <a class="nav-link" href="#fees" data-route="fees"><span class="nav-icon" aria-hidden="true" data-icon="fees"></span><span>Fee management</span></a>
+        <a class="nav-link" href="#salary" data-route="salary"><span class="nav-icon" aria-hidden="true" data-icon="salary"></span><span>Salary &amp; payroll</span></a>
+
+        <p class="nav-label">PEOPLE &amp; REPORTS</p>
+        <a class="nav-link" href="#teachers" data-route="teachers"><span class="nav-icon" aria-hidden="true" data-icon="teachers"></span><span>Teachers &amp; staff</span></a>
+        <a class="nav-link" href="#reports" data-route="reports"><span class="nav-icon" aria-hidden="true" data-icon="reports"></span><span>Reports</span></a>
+        <a class="nav-link" href="#admit-cards" data-route="admit-cards"><span class="nav-icon" aria-hidden="true" data-icon="cards"></span><span>Admit cards</span></a>
+
+        <p class="nav-label">CONFIGURATION</p>
+        <a class="nav-link" href="#settings" data-route="settings"><span class="nav-icon" aria-hidden="true" data-icon="settings"></span><span>Settings</span></a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="help-symbol" aria-hidden="true">?</div>
+        <div>
+          <strong>Getting started</strong>
+          <p>This is a demo-only build. No login or live data is connected.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+
+    <div class="main-column">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+            <span class="nav-icon" data-icon="menu" aria-hidden="true"></span>
+          </button>
+          <div class="breadcrumb"><span>CampusDesk</span><span class="breadcrumb-separator">/</span><strong id="breadcrumb-current">Dashboard</strong></div>
+        </div>
+        <div class="topbar-actions">
+          <form class="global-search" id="global-search" role="search">
+            <span class="search-icon" data-icon="search" aria-hidden="true"></span>
+            <input id="global-search-input" type="search" name="q" autocomplete="off" placeholder="Search students…" aria-label="Search students">
+            <kbd>Enter</kbd>
+          </form>
+          <span class="mode-pill"><span class="status-dot" aria-hidden="true"></span> Demo mode</span>
+        </div>
+      </header>
+
+      <main id="main-content" class="main-content" tabindex="-1">
+        <div id="page-content" aria-live="polite" aria-busy="false"></div>
+      </main>
+      <footer class="app-footer">
+        <span>CampusDesk ERP <span class="footer-separator">·</span> Portfolio prototype</span>
+        <span><span class="footer-status" aria-hidden="true"></span> Demo data only</span>
+      </footer>
+    </div>
+  </div>
+
+  <noscript>
+    <div class="noscript-message">CampusDesk needs JavaScript enabled to render the interactive demo dashboard.</div>
+  </noscript>
+</body>
+</html>
