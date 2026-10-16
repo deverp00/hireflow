@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#315c45">
+    <title>Admin Workspace | HireFlow</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: #f7f8f7;
+        }
+
+        .admin-header {
+            min-height: 66px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 28px;
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .admin-label {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 215px minmax(0, 1fr);
+            min-height: calc(100vh - 66px);
+        }
+
+        .admin-sidebar {
+            padding: 24px 13px;
+            background: #fff;
+            border-right: 1px solid var(--border);
+        }
+
+        .admin-sidebar p {
+            margin: 0 9px 12px;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .admin-nav {
+            display: grid;
+            gap: 4px;
+        }
+
+        .admin-nav button {
+            width: 100%;
+            padding: 11px 12px;
+            border: 0;
+            border-radius: 4px;
+            background: transparent;
+            color: #5e675f;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .admin-nav button:hover {
+            background: #f5f7f5;
+        }
+
+        .admin-nav button.active {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .admin-content {
+            min-width: 0;
+            padding: 30px;
+        }
+
+        .admin-page-heading {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .admin-page-heading h1 {
+            margin-bottom: 7px;
+            font-size: 25px;
+            line-height: 1.3;
+            letter-spacing: -0.7px;
+        }
+
+        .admin-page-heading p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .admin-stat {
+            padding: 19px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        .admin-stat p {
+            margin-bottom: 13px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .admin-stat strong {
+            display: block;
+            font-size: 27px;
+            font-weight: 700;
+        }
+
+        .admin-panel {
+            margin-bottom: 22px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        .admin-panel-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 17px 19px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .admin-panel-heading h2 {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .admin-table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 13px 17px;
+            border-bottom: 1px solid var(--border);
+            font-size: 11px;
+        }
+
+        .admin-table th {
+            background: #fafbfa;
+            color: var(--muted);
+            font-size: 9px;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .admin-table td {
+            color: #59635a;
+        }
+
+        .admin-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .admin-empty {
+            padding: 38px 18px !important;
+            color: var(--muted) !important;
+            text-align: center;
+            white-space: normal;
+        }
+
+        .admin-section[hidden],
+        #admin-workspace[hidden],
+        #admin-login[hidden] {
+            display: none !important;
+        }
+
+        .admin-message {
+            margin-top: 14px;
+            color: var(--muted);
+            font-size: 12px;
+            overflow-wrap: anywhere;
+        }
+
+        .admin-message:empty {
+            display: none;
+        }
+
+        .login-screen {
+            min-height: calc(100vh - 66px);
+            display: grid;
+            place-items: center;
+            padding: 25px;
+        }
+
+        .login-card {
+            width: min(100%, 400px);
+            padding: 29px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #fff;
+        }
+
+        .login-card h1 {
+            margin-bottom: 8px;
+            font-size: 25px;
+            letter-spacing: -0.7px;
+        }
+
+        .login-card > p {
+            margin-bottom: 25px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .admin-form {
+            display: grid;
+            gap: 17px;
+        }
+
+        .admin-form label {
+            display: grid;
+            gap: 7px;
+            color: #414a42;
+            font-size: 11px;
+            font-weight: 650;
+        }
+
+        .admin-form input,
+        .admin-form select,
+        .admin-form textarea {
+            width: 100%;
+            min-height: 41px;
+            padding: 10px 11px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: #fff;
+            color: var(--text);
+            font-size: 12px;
+        }
+
+        .admin-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .admin-form .button {
+            width: 100%;
+        }
+
+        .admin-form .button:disabled {
+            opacity: 0.6;
+        }
+
+        .admin-dialog {
+            width: min(580px, calc(100% - 28px));
+            max-height: 90vh;
+            margin: auto;
+            padding: 25px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #fff;
+            color: var(--text);
+        }
+
+        .admin-dialog::backdrop {
+            background: rgba(20, 30, 23, 0.5);
+        }
+
+        .admin-dialog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 23px;
+        }
+
+        .admin-dialog-header h2 {
+            font-size: 21px;
+        }
+
+        .admin-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .admin-form-full {
+            grid-column: 1 / -1;
+        }
+
+        .admin-dialog-actions {
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 23px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 1000px) {
+            .admin-stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 700px) {
+            .admin-header {
+                padding: 12px 16px;
+            }
+
+            .admin-layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .admin-sidebar {
+                padding: 12px;
+                border-right: 0;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .admin-sidebar > p {
+                margin-bottom: 8px;
+            }
+
+            .admin-nav {
+                display: flex;
+                gap: 5px;
+                overflow-x: auto;
+            }
+
+            .admin-nav button {
+                width: auto;
+                flex-shrink: 0;
+                white-space: nowrap;
+            }
+
+            .admin-content {
+                padding: 22px 15px;
+            }
+
+            .admin-page-heading h1 {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .admin-stats {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .admin-form-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .admin-form-full {
+                grid-column: auto;
+            }
+
+            .admin-dialog {
+                padding: 18px;
+            }
+
+            .admin-dialog-actions {
+                flex-direction: column-reverse;
+            }
+
+            .admin-dialog-actions .button {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <script type="module" src="admin.js"></script>
+</head>
+
+<body>
+    <header class="admin-header">
+        <a class="brand" href="index.html">
+            <span class="brand-mark" aria-hidden="true">H</span>
+            <span class="brand-name">HireFlow</span>
+        </a>
+
+        <div style="display:flex;align-items:center;gap:14px;">
+            <span class="admin-label">Admin workspace</span>
+            <button
+                class="button button-secondary"
+                id="admin-sign-out"
+                type="button"
+                hidden
+            >
+                Sign out
+            </button>
+        </div>
+    </header>
+
+    <!-- Login remains visible until authentication is implemented. -->
+    <main id="admin-login" class="login-screen">
+        <section class="login-card">
+            <p class="eyebrow">ADMINISTRATION</p>
+            <h1>Welcome back</h1>
+            <p>Sign in to manage jobs, applicants and recruitment.</p>
+
+            <form class="admin-form" id="admin-login-form">
+                <label>
+                    Email address
+                    <input
+                        id="admin-email"
+                        type="email"
+                        name="email"
+                        autocomplete="username"
+                        maxlength="254"
+                        required
+                    >
+                </label>
+
+                <label>
+                    Password
+                    <input
+                        id="admin-password"
+                        type="password"
+                        name="password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </label>
+
+                <button
+                    class="button button-primary"
+                    id="admin-login-submit"
+                    type="submit"
+                >
+                    Sign in
+                </button>
+            </form>
+
+            <p class="admin-message" id="admin-login-message" aria-live="polite"></p>
+        </section>
+    </main>
+
+    <!-- The authenticated workspace will be shown by admin.js. -->
+    <div id="admin-workspace" hidden>
+        <div class="admin-layout">
+            <aside class="admin-sidebar">
+                <p>Workspace</p>
+
+                <nav class="admin-nav" aria-label="Admin navigation">
+                    <button class="active" type="button" data-admin-view="overview">
+                        Overview
+                    </button>
+
+                    <button type="button" data-admin-view="jobs">
+                        Job openings
+                    </button>
+
+                    <button type="button" data-admin-view="candidates">
+                        Candidates
+                    </button>
+
+                    <button type="button" data-admin-view="interviews">
+                        Interviews
+                    </button>
+
+                    <button type="button" data-admin-view="settings">
+                        Settings
+                    </button>
+                </nav>
+            </aside>
+
+            <main class="admin-content">
+                <!-- OVERVIEW -->
+                <section class="admin-section" data-admin-section="overview">
+                    <div class="admin-page-heading">
+                        <div>
+                            <h1>Recruitment overview</h1>
+                            <p>Monitor recruitment activity and candidate progress.</p>
+                        </div>
+
+                        <button
+                            class="button button-primary"
+                            type="button"
+                            data-open-job-form
+                        >
+                            + Create job
+                        </button>
+                    </div>
+
+                    <div class="admin-stats">
+                        <article class="admin-stat">
+                            <p>Open positions</p>
+                            <strong data-admin-stat="openJobs">—</strong>
+                        </article>
+
+                        <article class="admin-stat">
+                            <p>Total applications</p>
+                            <strong data-admin-stat="applications">—</strong>
+                        </article>
+
+                        <article class="admin-stat">
+                            <p>Under review</p>
+                            <strong data-admin-stat="underReview">—</strong>
+                        </article>
+
+                        <article class="admin-stat">
+                            <p>Interviews</p>
+                            <strong data-admin-stat="interviews">—</strong>
+                        </article>
+                    </div>
+
+                    <section class="admin-panel">
+                        <div class="admin-panel-heading">
+                            <h2>Recent applications</h2>
+                            <button
+                                class="button button-secondary"
+                                type="button"
+                                data-admin-view="candidates"
+                            >
+                                View all
+                            </button>
+                        </div>
+
+                        <div class="admin-table-wrap">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Applicant</th>
+                                        <th>Position</th>
+                                        <th>Applied on</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="overview-applications-body">
+                                    <tr>
+                                        <td colspan="4" class="admin-empty">
+                                            Application records will load from Firebase.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </section>
+
+                <!-- JOB MANAGEMENT -->
+                <section
+                    class="admin-section"
+                    data-admin-section="jobs"
+                    hidden
+                >
+                    <div class="admin-page-heading">
+                        <div>
+                            <h1>Job openings</h1>
+                            <p>Create and manage published vacancies.</p>
+                        </div>
+
+                        <button
+                            class="button button-primary"
+                            type="button"
+                            data-open-job-form
+                        >
+                            + Create job
+                        </button>
+                    </div>
+
+                    <section class="admin-panel">
+                        <div class="admin-panel-heading">
+                            <h2>All positions</h2>
+                        </div>
+
+                        <div class="admin-table-wrap">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Job title</th>
+                                        <th>Department</th>
+                                        <th>Location</th>
+                                        <th>Applications</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="admin-jobs-body">
+                                    <tr>
+                                        <td colspan="6" class="admin-empty">
+                                            No job records loaded.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </section>
+
+                <!-- CANDIDATE MANAGEMENT -->
+                <section
+                    class="admin-section"
+                    data-admin-section="candidates"
+                    hidden
+                >
+                    <div class="admin-page-heading">
+                        <div>
+                            <h1>Candidates</h1>
+                            <p>Review applications and update recruitment status.</p>
+                        </div>
+                    </div>
+
+                    <section class="admin-panel">
+                        <div class="admin-panel-heading">
+                            <h2>Applications</h2>
+
+                            <input
+                                type="search"
+                                id="candidate-search"
+                                placeholder="Search applicants"
+                                aria-label="Search candidates"
+                                style="max-width:230px;min-height:36px;padding:8px;border:1px solid var(--border);border-radius:4px;"
+                            >
+                        </div>
+
+                        <div class="admin-table-wrap">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Applicant</th>
+                                        <th>Job</th>
+                                        <th>Applied on</th>
+                                        <th>Status</th>
+                                        <th>Resume</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="admin-candidates-body">
+                                    <tr>
+                                        <td colspan="6" class="admin-empty">
+                                            Applicant records will load from Firebase.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </section>
+
+                <!-- INTERVIEWS -->
+                <section
+                    class="admin-section"
+                    data-admin-section="interviews"
+                    hidden
+                >
+                    <div class="admin-page-heading">
+                        <div>
+                            <h1>Interviews</h1>
+                            <p>Manage interview schedules for applicants.</p>
+                        </div>
+                    </div>
+
+                    <section class="admin-panel">
+                        <div class="admin-panel-heading">
+                            <h2>Interview schedule</h2>
+                        </div>
+
+                        <div class="admin-table-wrap">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Candidate</th>
+                                        <th>Job</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="admin-interviews-body">
+                                    <tr>
+                                        <td colspan="6" class="admin-empty">
+                                            Interview records will load from Firebase.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </section>
+
+                <!-- SETTINGS -->
+                <section
+                    class="admin-section"
+                    data-admin-section="settings"
+                    hidden
+                >
+                    <div class="admin-page-heading">
+                        <div>
+                            <h1>Company settings</h1>
+                            <p>Manage the company details shown on the careers portal.</p>
+                        </div>
+                    </div>
+
+                    <section class="admin-panel">
+                        <div class="admin-panel-heading">
+                            <h2>Company information</h2>
+                        </div>
+
+                        <form class="admin-form" id="company-settings-form" style="padding:20px;">
+                            <label>
+                                Company name
+                                <input
+                                    type="text"
+                                    name="companyName"
+                                    id="company-name"
+                                    maxlength="150"
+                                >
+                            </label>
+
+                            <label>
+                                Careers page heading
+                                <input
+                                    type="text"
+                                    name="heading"
+                                    id="company-heading"
+                                    maxlength="180"
+                                >
+                            </label>
+
+                            <label>
+                                Company description
+                                <textarea
+                                    name="description"
+                                    id="company-description"
+                                    maxlength="3000"
+                                ></textarea>
+                            </label>
+
+                            <button class="button button-primary" type="submit">
+                                Save company information
+                            </button>
+
+                            <p
+                                class="admin-message"
+                                id="company-settings-message"
+                                aria-live="polite"
+                            ></p>
+                        </form>
+                    </section>
+                </section>
+
+                <p class="admin-message" id="admin-global-message" aria-live="polite"></p>
+            </main>
+        </div>
+    </div>
+
+    <!-- CREATE / EDIT JOB -->
+    <dialog class="admin-dialog" id="job-dialog">
+        <div class="admin-dialog-header">
+            <div>
+                <p class="eyebrow">JOB MANAGEMENT</p>
+                <h2 id="job-dialog-title">Create job opening</h2>
+            </div>
+
+            <button
+                class="icon-button"
+                type="button"
+                id="close-job-dialog"
+                aria-label="Close job form"
+            >
+                ×
+            </button>
+        </div>
+
+        <form class="admin-form" id="job-form">
+            <input type="hidden" name="jobId" id="job-id">
+
+            <div class="admin-form-grid">
+                <label class="admin-form-full">
+                    Job title *
+                    <input
+                        type="text"
+                        id="job-title"
+                        name="title"
+                        maxlength="150"
+                        required
+                    >
+                </label>
+
+                <label>
+                    Department *
+                    <input
+                        type="text"
+                        id="job-department"
+                        name="department"
+                        maxlength="100"
+                        required
+                    >
+                </label>
+
+                <label>
+                    Location *
+                    <input
+                        type="text"
+                        id="job-location"
+                        name="location"
+                        maxlength="150"
+                        required
+                    >
+                </label>
+
+                <label>
+                    Employment type *
+                    <select id="job-type" name="employmentType" required>
+                        <option value="">Select type</option>
+                        <option value="Full-time">Full-time</option>
+                        <option value="Part-time">Part-time</option>
+                        <option value="Contract">Contract</option>
+                        <option value="Internship">Internship</option>
+                    </select>
+                </label>
+
+                <label>
+                    Workplace
+                    <select id="job-workplace" name="workplace">
+                        <option value="">Select workplace</option>
+                        <option value="On-site">On-site</option>
+                        <option value="Hybrid">Hybrid</option>
+                        <option value="Remote">Remote</option>
+                    </select>
+                </label>
+
+                <label class="admin-form-full">
+                    Job description *
+                    <textarea
+                        id="job-description"
+                        name="description"
+                        maxlength="12000"
+                        required
+                    ></textarea>
+                </label>
+
+                <label class="admin-form-full">
+                    Required qualifications
+                    <textarea
+                        id="job-qualifications"
+                        name="qualifications"
+                        maxlength="6000"
+                    ></textarea>
+                </label>
+
+                <label>
+                    Application deadline
+                    <input
+                        id="job-deadline"
+                        name="deadline"
+                        type="date"
+                    >
+                </label>
+
+                <label>
+                    Publication status
+                    <select id="job-status" name="status" required>
+                        <option value="draft">Draft</option>
+                        <option value="published">Published</option>
+                        <option value="closed">Closed</option>
+                    </select>
+                </label>
+            </div>
+
+            <p class="admin-message" id="job-form-message" aria-live="polite"></p>
+
+            <div class="admin-dialog-actions">
+                <button
+                    class="button button-secondary"
+                    type="button"
+                    id="cancel-job-dialog"
+                >
+                    Cancel
+                </button>
+
+                <button class="button button-primary" type="submit" id="save-job-button">
+                    Save job
+                </button>
+            </div>
+        </form>
+    </dialog>
+</body>
+</html>
